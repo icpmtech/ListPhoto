@@ -3,36 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:self="clr-namespace:ListPhoto"
+        xmlns:ListAlbum="clr-namespace:ListPhoto"
+        xmlns:About="clr-namespace:ListPhoto"
+        xmlns:Album="clr-namespace:ListPhoto"
         mc:Ignorable="d"
         Loaded="OnLoaded"
-        Title="Album list" Height="Auto" Width="Auto">
+        Title="Album list" Height="Auto" Width="800">
 
-    <Grid x:Name="ListAlbum">
+    <ContentControl>
+        <Grid x:Name="ListAlbum">
+            <Album:UserControlAbout x:Name="About"   Visibility="Visible" Width="800" Margin="0,25,-6.4,380.6" />
+            <StackPanel>
+                <Menu DockPanel.Dock="Top" Height="25" RenderTransformOrigin="0.485,-2.596">
 
-        <TreeView  Name="trvAlbums">
-            <TreeView.ItemContainerStyle>
-                <Style TargetType="{x:Type TreeViewItem}">
-                    <EventSetter Event="MouseDoubleClick" Handler="TreeViewItem_MouseDoubleClick" />
-                </Style>
-            </TreeView.ItemContainerStyle>
-            <TreeView.Resources>
-                <HierarchicalDataTemplate  DataType="{x:Type self:Album}" ItemsSource="{Binding Members}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock  Text="{Binding Title}" />
-                        <TextBlock Text=" [ Photos " Foreground="Blue" />
-                        <TextBlock Text="{Binding Members.Count}" Foreground="Blue" />
-                        <TextBlock Text=" ]" Foreground="Blue" />
-                    </StackPanel>
-                </HierarchicalDataTemplate>
-                <DataTemplate DataType="{x:Type self:AlbumMember}">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding Title}" />
-                        <TextBlock Text="" Foreground="Green" />
-                        <Image Source="{Binding Url}" Width="20" Margin="0,0,0,0" />
-                    </StackPanel>
-                </DataTemplate>
-            </TreeView.Resources>
-        </TreeView>
-    </Grid>
+                    <MenuItem Header="About Button" x:Name="btnAbout" Click="MenuItem_Click" />
+                </Menu>
+            </StackPanel>
+            <Album:UserControlAlbum  x:Name="Album" Visibility="Visible" Width="785" Height="Auto" Margin="4,25,4.6,-1122.4" />
+        </Grid>
+    </ContentControl>
 </Window>
